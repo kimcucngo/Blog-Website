@@ -15,7 +15,10 @@ class PostController extends Controller
         return view('admin.posts.create');
     }
     public function store(){
-        auth()->user();
-        dd(request()->all());
+       request()->validate([
+        'title'=>'required|min:8|max:255',
+        'post_image'=>'file',
+        'body'=>'required',
+       ]);
     }
 }
