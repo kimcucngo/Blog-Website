@@ -30,4 +30,8 @@ class PostController extends Controller
        auth()->user()->posts()->create($inputs);
        return back();
     }
+    public funtion destroy(){
+
+    }
+    
 }
