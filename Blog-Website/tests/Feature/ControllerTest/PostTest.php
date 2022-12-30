@@ -24,6 +24,7 @@ class PostTest extends TestCase
         $response->assertStatus(200);
     }
 
+    //Test Add Post
     public function testAddPost()
     {
         $inputData = [
@@ -38,26 +39,31 @@ class PostTest extends TestCase
         $response->assertRedirect(route('post.index'));
         $this->assertDatabaseHas('posts', $inputData);
     }
-    public function testEditPost()
+
+    //Test Update Post
+    public function testUpdatePost()
     {
         $inputData = [
-            'title' => 'jkhasjdfdsjkfdks',
-            'body' => 'kjasdfkjdsjklfkldjns',
+            'title' => 'ngothikimcuc1993',
+            'body' => 'age:29 engineer'
         ];
         $url = route('post.store');
         $user = User::factory()->create();
         $this->actingAs($user)
-                ->post($url, $inputData);
+                ->post($url,$inputData);
         $id = $user->posts->first()->id;
+        print(Post::first());
         $editData = [
-            'title' => '21321321421432',
-            'body' => '21321321421432',
+            'title' => 'phandinhloc1993',
+            'body' => 'age:29 IT engineer'
         ];
-        $response = $this->patch(route('post.update',$id), $editData);
+        $response = $this->patch(route('post.update',$id),$editData);
+        print(Post::first());
         $response->assertRedirect(route('post.index'));
-        $this->assertDatabaseHas('posts', $editData);
-
+        $this->assertDatabaseHas('posts',$editData);
     }
+
+    //Test Create
     public function testCreate()
     {
         $url = route('post.create');
@@ -66,6 +72,8 @@ class PostTest extends TestCase
                 ->get($url);
         $response->assertStatus(200);
     }
+    
+    //Test Index
     public function testIndex()
     {
         $url = route('post.index');
