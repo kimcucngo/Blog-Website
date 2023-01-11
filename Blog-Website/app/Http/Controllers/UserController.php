@@ -28,5 +28,10 @@ class UserController extends Controller
           } 
         $user->update($inputs);
         return back();
-}
+    }
+    public function destroy(User $user){
+        $user->delete();
+        session()-> flash('user-deleted','User had been deleted');
+        return back();
+    }
 }
