@@ -27,7 +27,7 @@ jobs:
             ${{ runner.os }}-composer-
       - name: composer install
         if: steps.cache.outputs.cache-hit != 'true'
-        run: composer install -n --prefer-dist
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: copy .env
         run: cp .env.unittesting .env
       - name: start pgsql
